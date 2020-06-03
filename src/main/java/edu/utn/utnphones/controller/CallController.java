@@ -38,4 +38,8 @@ public class CallController {
     public List<Call> getCallsByDate(Date dateFrom, Date dateTo, int userId){
         return callService.getCallsByDate(dateFrom,dateTo,userId);
     }
+
+    public List<Call> getCallsByDuration(int duration){
+        return callService.getCallsByDuration(duration);
+    }
 }

@@ -19,4 +19,9 @@ public interface CallDao extends JpaRepository<Call,Integer> {
             "inner join users u on pl.line_user_id = u.user_id \n" +
             "where c.call_date >= ?1  and c.call_date <= ?2 and u.user_id = ?3",nativeQuery = true)
     List<Call> getCallsByDate(Date dateFrom, Date dateTo, int userId);
+
+    @Query(value = "select * from calls c inner join phone_lines pl on c.call_line_id_from = pl.line_id \n" +
+            "inner join users u on pl.line_user_id = u.user_id \n" +
+            "where c.call_duration_seg = ?1 and u.user_id = pl.line_user_id",nativeQuery = true)
+    List<Call> getCallsByDuration(int duration);
 }

@@ -30,6 +30,11 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
     public ErrorResponseDto handleNotFoundException(UserNotexistException exc) {
         return new ErrorResponseDto(3, exc.getMessage());
     }
-    
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ErrorResponseDto handleNotFoundException(IllegalArgumentException exc) {
+        return new ErrorResponseDto(4, exc.getMessage());
+    }
 
 }

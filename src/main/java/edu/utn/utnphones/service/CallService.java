@@ -33,4 +33,8 @@ public class CallService {
     public List<Call> getCallsByDate(Date dateFrom, Date dateTo, int userId){
         return callDao.getCallsByDate(dateFrom,dateTo,userId);
     }
+
+    public List<Call> getCallsByDuration(int duration){
+        return  callDao.getCallsByDuration(duration);
+    }
 }
