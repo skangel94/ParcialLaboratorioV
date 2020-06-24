@@ -3,6 +3,10 @@ package edu.utn.utnphones.controller.web;
 import edu.utn.utnphones.controller.CallController;
 import edu.utn.utnphones.domain.Call;
 import edu.utn.utnphones.exception.IllegalDurationException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/test/duration")
+@Api(value = "Endpoint Calls by duration", description = "Get calls by duration")
 public class CallsByDuration{
     private CallController callController;
 
@@ -24,7 +29,14 @@ public class CallsByDuration{
         this.callController = callController;
     }
 
-    @GetMapping
+    @GetMapping(produces = "application/json")
+    @ApiOperation(value = "Calls by duration", notes = "Return list of calls" )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved list"),
+            @ApiResponse(code = 204, message = "No content"),
+            @ApiResponse(code = 400, message = "Bad request")
+    }
+    )
     public ResponseEntity<List<Call>> getCallsByDuration(@RequestParam(value = "duration") int duration){
         ResponseEntity<List<Call>> responseEntity;
         List<Call> callList;
